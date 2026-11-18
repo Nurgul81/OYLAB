@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="OYLAB — ойлан, оқы, талда, дәлелде.">
+  <title>OYLAB.kz — Білім платформасы</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="#"><span>OYLAB</span><small>.kz</small></a>
+  <nav><a href="#features">Мүмкіндіктер</a><a href="#about">Платформа туралы</a></nav>
+  <button class="btn btn-outline" id="openLogin">Кіру</button>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="hero-copy">
+      <div class="eyebrow">11-СЫНЫПҚА АРНАЛҒАН БІЛІМ ПЛАТФОРМАСЫ</div>
+      <h1>Ойлан. Оқы.<br><em>Талда. Дәлелде.</em></h1>
+      <p>ҰБТ-ға және қорытынды аттестаттауға саналы дайындал. Біліміңді тексер, қателеріңді талда, нәтижелеріңді бақыла.</p>
+      <div class="hero-actions"><button class="btn btn-gold" id="startTest">Қонақ ретінде кіру <span>→</span></button><button class="btn btn-quiet" id="heroLogin">Жеке кабинетке кіру</button></div>
+      <div class="hero-note"><span class="dot"></span> Бірге үйренеміз. Нәтижеге бірге жетеміз.</div>
+    </div>
+    <div class="hero-card">
+      <div class="card-top"><span>OYLAB / ОҚУ САУАТТЫЛЫҒЫ</span><span class="live">● ДЕМО</span></div>
+      <div class="progress-ring"><div><strong>85%</strong><small>үлгі нәтиже</small></div></div>
+      <h3>Біліміңді дамыт</h3>
+      <p>Әр тапсырма — ойлау дағдыңды шыңдауға мүмкіндік.</p>
+      <div class="mini-stats"><div><b>10</b><small>сұрақ</small></div><div><b>15</b><small>минут</small></div><div><b>∞</b><small>мүмкіндік</small></div></div>
+    </div>
+  </section>
+
+  <section class="features section" id="features">
+    <div class="section-head"><div class="eyebrow">ПЛАТФОРМА МҮМКІНДІКТЕРІ</div><h2>Оқу процесі — бір кеңістікте</h2><p>Оқушыға да, мұғалімге де түсінікті әрі ыңғайлы орта.</p></div>
+    <div class="feature-grid">
+      <article class="feature"><div class="feature-icon">01</div><h3>Оқушы кабинеті</h3><p>Тест орындау, нәтижені көру және алдыңғы жұмыстарыңды бақылау.</p></article>
+      <article class="feature"><div class="feature-icon">02</div><h3>Мұғалім кабинеті</h3><p>Сыныптар, оқушылар, тапсырмалар және оқу жетістіктері бір жерде.</p></article>
+      <article class="feature"><div class="feature-icon">03</div><h3>Талдау және түсіндіру</h3><p>Қате жауаптарды анықтап, дұрыс жауаптың түсіндірмесін оқу.</p></article>
+    </div>
+  </section>
+
+  <section class="about section" id="about"><div><div class="eyebrow">OYLAB ТУРАЛЫ</div><h2>Білім — жаттау емес,<br><em>ойлай білу.</em></h2></div><p>OYLAB — оқушылардың оқу сауаттылығын дамытуға арналған цифрлық оқу ортасы. Алғашқы кезеңде ҰБТ оқу сауаттылығына басымдық беріледі. Кейін платформа қорытынды аттестаттауға дайындық материалдарымен толықтырылады.</p></section>
+</main>
+
+<footer><a class="brand" href="#"><span>OYLAB</span><small>.kz</small></a><p>Ойлан. Оқы. Талда. Дәлелде.</p><small>© 2026 OYLAB. Бастапқы демонстрациялық нұсқа.</small></footer>
+
+<div class="modal" id="loginModal" aria-hidden="true">
+  <div class="modal-panel">
+    <button class="close" id="closeLogin" aria-label="Жабу">×</button>
+    <div class="eyebrow">ҚОШ КЕЛДІҢІЗ!</div><h2>Жеке кабинетке кіру</h2>
+    <p class="muted">Оқушы немесе мұғалім кабинетін таңдаңыз.</p>
+    <div class="role-switch"><button class="role active" data-role="student">Оқушы</button><button class="role" data-role="teacher">Мұғалім</button></div>
+    <label>Логин<input id="username" placeholder="Мысалы: student01"></label>
+    <label>Құпиясөз<input id="password" type="password" placeholder="Құпиясөз"></label>
+    <button class="btn btn-gold full" id="loginSubmit">Кіру <span>→</span></button>
+    <div class="demo-hint">Бұл демонстрациялық нұсқа: нақты аккаунттар мен құпиясөздер әлі қосылмаған.</div>
+  </div>
+</div>
+
+<div class="modal" id="testModal" aria-hidden="true">
+  <div class="modal-panel test-panel">
+    <button class="close" id="closeTest" aria-label="Жабу">×</button>
+    <div class="eyebrow">ҰБТ / ОҚУ САУАТТЫЛЫҒЫ</div><h2>Демо тапсырма</h2>
+    <p class="passage">Мәтінді түсініп оқу — ақпаратты қабылдаумен ғана шектелмейді. Оқырман автордың ойын анықтап, деректерді салыстырып, қорытынды жасай білуі керек. Бұл дағды күнделікті өмірде де, білім алуда да маңызды.</p>
+    <h3>Мәтіннің негізгі ойы қандай?</h3>
+    <div class="answers">
+      <label><input type="radio" name="answer" value="a"> Мәтінді жылдам оқу маңызды.</label>
+      <label><input type="radio" name="answer" value="b"> Оқу сауаттылығы ақпаратты талдап, қорытынды жасауды қамтиды.</label>
+      <label><input type="radio" name="answer" value="c"> Ақпаратты жаттап алу жеткілікті.</label>
+      <label><input type="radio" name="answer" value="d"> Оқу дағдысы тек мектепте қажет.</label>
+    </div>
+    <button class="btn btn-gold full" id="checkAnswer">Жауапты тексеру</button>
+    <div id="feedback" class="feedback" aria-live="polite"></div>
+  </div>
+</div>
+
+<div class="dashboard" id="dashboard" aria-hidden="true">
+  <div class="dash-panel">
+    <button class="close" id="closeDash">×</button>
+    <div class="eyebrow">OYLAB / ЖЕКЕ КАБИНЕТ</div><h2 id="dashTitle">Оқушы кабинеті</h2>
+    <p id="dashWelcome" class="muted"></p>
+    <div class="dash-grid" id="dashContent"></div>
+    <button class="btn btn-outline" id="logout">Шығу</button>
+    <p class="demo-hint">Бұл — интерфейс демонстрациясы. Деректер серверде сақталмайды және логин/құпиясөз нақты тексерілмейді.</p>
+  </div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
