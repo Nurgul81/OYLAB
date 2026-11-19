@@ -1,40 +1,30 @@
-const $ = id => document.getElementById(id);
-let selectedRole = "student";
-const loginModal = $("loginModal"), testModal = $("testModal"), dashboard = $("dashboard");
-function show(el){el.classList.add("show");el.setAttribute("aria-hidden","false")}
-function hide(el){el.classList.remove("show");el.setAttribute("aria-hidden","true")}
-["openLogin","heroLogin"].forEach(id => $(id).addEventListener("click",()=>show(loginModal)));
-$("closeLogin").onclick=()=>hide(loginModal);
-$("startTest").onclick=()=>show(testModal);
-$("closeTest").onclick=()=>hide(testModal);
-document.querySelectorAll(".role").forEach(btn=>btn.onclick=()=>{
-  selectedRole=btn.dataset.role;
-  document.querySelectorAll(".role").forEach(x=>x.classList.toggle("active",x===btn));
-});
-$("loginSubmit").onclick=()=>{
-  const user=$("username").value.trim();
-  const pass=$("password").value;
-  if(!user||!pass){alert("Логин мен құпиясөзді енгізіңіз.");return;}
-  hide(loginModal);
-  $("dashTitle").textContent=selectedRole==="teacher"?"Мұғалім кабинеті":"Оқушы кабинеті";
-  $("dashWelcome").textContent=`Қош келдіңіз, ${user}! Бұл — OYLAB демонстрациялық кабинеті.`;
-  $("dashContent").innerHTML=selectedRole==="teacher"
-    ? '<div class="dash-item"><b>11 «Ә»</b><span>Сынып</span></div><div class="dash-item"><b>28</b><span>Оқушы саны</span></div><div class="dash-item"><b>—</b><span>Тест тапсырған</span></div><div class="dash-item"><b>—</b><span>Әлі тапсырмаған</span></div>'
-    : '<div class="dash-item"><b>11 «Ә»</b><span>Сынып</span></div><div class="dash-item"><b>0</b><span>Орындалған тест</span></div><div class="dash-item"><b>—</b><span>Орташа нәтиже</span></div><div class="dash-item"><b>0</b><span>Қайталау керек</span></div>';
-  show(dashboard);
-};
-$("closeDash").onclick=()=>hide(dashboard);
-$("logout").onclick=()=>hide(dashboard);
-$("checkAnswer").onclick=()=>{
-  const chosen=document.querySelector('input[name="answer"]:checked');
-  const box=$("feedback");
-  if(!chosen){box.textContent="Алдымен бір жауапты таңдаңыз.";box.style.color="#9a6a18";return;}
-  if(chosen.value==="b"){
-    box.textContent="Дұрыс жауап! Мәтінде оқу сауаттылығы ақпаратты талдау, автор ойын анықтау және қорытынды жасаумен байланыстырылған.";
-    box.style.color="#26734d";
-  }else{
-    box.textContent="Бұл жауап дұрыс емес. Мәтіндегі негізгі ойды қайта оқып, ақпаратты талдау мен қорытынды жасауға назар аударыңыз.";
-    box.style.color="#a34b43";
-  }
-};
-[loginModal,testModal,dashboard].forEach(el=>el.addEventListener("click",e=>{if(e.target===el)hide(el)}));
+const questions = [
+{passage:"Кітап оқу — адамның ой-өрісін кеңейтетін маңызды әрекеттердің бірі. Кітап арқылы адам жаңа ақпарат алып қана қоймай, өз ойын жүйелі жеткізуге, салыстыруға және талдауға үйренеді. Қазіргі заманда ақпарат өте көп. Әлеуметтік желілер мен интернеттен түрлі мәліметтерді жылдам табуға болады. Алайда ақпараттың көп болуы оның барлығы пайдалы әрі шынайы екенін білдірмейді. Сондықтан оқырман ақпаратты саралап, оның сенімділігін тексере білуі қажет. Кітап оқу адамды асықпай ойлануға, оқиғаның себеп-салдарын түсінуге дағдыландырады.",title:"1-МӘТІН. КІТАП ОҚУДЫҢ МАҢЫЗЫ",q:"Мәтіннің негізгі ойы қандай?",o:["Кітап оқу тек бос уақытты өткізу құралы","Кітап оқу адамның ойлау және талдау қабілетін дамытады","Интернет кітаптан пайдалырақ","Ақпаратты жылдам табу маңызды"],a:1,e:"Мәтінде кітап оқудың ойлау, салыстыру және талдау қабілеттерін дамытатыны айтылған."},
+{passage:null,q:"Автор интернеттегі ақпарат туралы қандай пікір білдіреді?",o:["Интернеттегі ақпараттың бәрі шынайы","Интернетті мүлде қолданбау керек","Ақпарат көп болғанымен, оны тексеру қажет","Интернет кітап оқуға кедергі келтіреді"],a:2,e:"Ақпараттың көп болуы оның шынайы екенін білдірмейді, сондықтан оны тексеру керек."},
+{passage:null,q:"«Саралау» сөзінің мәтіндегі мағынасына жақын нұсқаны тап.",o:["Жаттау","Іріктеп, бағалау","Көшіру","Жылдам оқу"],a:1,e:"Саралау — ақпаратты іріктеп, оның маңыздылығы мен сенімділігін бағалау."},
+{passage:null,q:"Кітап оқу адамды қандай әрекетке дағдыландырады?",o:["Асығыс шешім қабылдауға","Ақпаратты жаттап алуға","Асықпай ойлануға","Тек интернеттен іздеуге"],a:2,e:"Мәтінде кітап оқу адамның асықпай ойлануына көмектесетіні көрсетілген."},
+{passage:null,q:"Мәтінге сәйкес дұрыс тұжырымды белгіле.",o:["Ақпараттың көп болуы оның пайдалы екенін дәлелдейді","Кітап оқу тек оқушыларға қажет","Ақпараттың сенімділігін тексеру маңызды","Кітап оқу адамның ойын жеткізуіне әсер етпейді"],a:2,e:"Ақпараттың сенімділігін тексеру қажеттігі мәтінде нақты айтылған."},
+{passage:"Қалалық саябақ — тұрғындардың демалатын орны ғана емес, табиғи ортаның маңызды бөлігі. Ағаштар ауаны шаңнан тазартып, жазда көлеңке береді. Құстар мен ұсақ жануарларға да қолайлы орта қалыптастырады. Соңғы жылдары кейбір қалаларда саябақ аумағын кеңейтуге ерекше көңіл бөлінуде. Дегенмен жасыл аймақты көбейту тек ағаш отырғызумен шектелмейді. Оны күтіп-баптау, суару және тазалығын сақтау да маңызды. Егер тұрғындар ортақ кеңістікке жауапкершілікпен қараса, саябақ ұзақ уақыт бойы баршаға қызмет етеді.",title:"2-МӘТІН. ҚАЛАЛЫҚ САЯБАҚТЫҢ ҚҰНДЫЛЫҒЫ",q:"Мәтіннің басты тақырыбы қандай?",o:["Қаладағы көлік қозғалысы","Саябақтың табиғат пен адам өміріндегі маңызы","Ағаш түрлерінің ерекшелігі","Құстардың қоныс аударуы"],a:1,e:"Мәтін саябақтың тұрғындарға және табиғи ортаға пайдасын сипаттайды."},
+{passage:null,q:"Ағаштардың мәтінде аталған пайдасын көрсет.",o:["Жолдарды кеңейтеді","Ауаны шаңнан тазартып, көлеңке береді","Қаладағы шуды толық жояды","Жауын-шашынды тоқтатады"],a:1,e:"Екінші сөйлемде ағаштардың ауаны шаңнан тазартып, көлеңке беретіні айтылған."},
+{passage:null,q:"Автордың пікірінше, жасыл аймақты көбейту нені қамтиды?",o:["Тек ағаш отырғызуды","Тек орындық орнатуды","Отырғызу және оны күтіп-баптауды","Саябаққа кіруді шектеуді"],a:2,e:"Автор ағаш отырғызумен қатар суару, тазалау және күтіп-баптау маңызды дейді."},
+{passage:null,q:"«Ортақ кеңістікке жауапкершілікпен қарау» тіркесінің мәні қандай?",o:["Саябаққа тек демалу үшін бару","Қоғамдық орынды күтіп, тазалығын сақтау","Саябақта көп уақыт өткізу","Жаңа ғимараттар салу"],a:1,e:"Бұл тіркес баршаға ортақ орынды таза ұстап, оған қамқор болуды білдіреді."},
+{passage:null,q:"Екі мәтінге ортақ ойды анықта.",o:["Ақпаратты жылдам табу керек","Әр адам жеке әрекет етуі тиіс","Пайдалы нәтижеге жету үшін саналы әрі жауапты әрекет маңызды","Тек үлкен қалаларда даму мүмкіндігі бар"],a:2,e:"Бірінші мәтін ақпаратты саналы бағалауды, екіншісі ортақ ортаға жауапкершілікпен қарауды ұсынады."}
+];
+let current=0, selected=Array(10).fill(null), student=null, timerId=null, seconds=900, lastScore=0;
+const $=id=>document.getElementById(id);
+function showPage(id){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));$(id).classList.add('active');window.scrollTo(0,0);document.querySelectorAll('.nav-link').forEach(b=>b.classList.remove('active'));if(id==='home'||id==='tests'||id==='about'){const idx={home:0,tests:1,about:2}[id];document.querySelectorAll('.nav-link')[idx].classList.add('active')}if(id==='profile')renderProfile();if(id==='teacher')renderTeacher()}
+function openLogin(){$('loginModal').classList.remove('hidden');$('loginError').textContent='';$('studentName').focus()}
+function closeLogin(){$('loginModal').classList.add('hidden')}
+function enterStudent(){const name=$('studentName').value.trim();if(name.length<3){$('loginError').textContent='Аты-жөніңді толық енгізші.';return}student={name,klass:$('studentClass').value};localStorage.setItem('oylabStudent',JSON.stringify(student));closeLogin();showPage('profile')}
+function startTest(){if(!student){openLogin();return}current=0;selected=Array(10).fill(null);seconds=900;showPage('quiz');renderQuestion();clearInterval(timerId);timerId=setInterval(()=>{seconds--;const m=String(Math.floor(seconds/60)).padStart(2,'0'),s=String(seconds%60).padStart(2,'0');$('timer').textContent=m+':'+s;if(seconds<=0){clearInterval(timerId);finishTest()}},1000)}
+function renderQuestion(){const q=questions[current];$('qCounter').textContent=`СҰРАҚ ${String(current+1).padStart(2,'0')} / 10`;$('questionText').textContent=q.q;$('passageBox').innerHTML=q.passage?`<strong>${q.title}</strong>${q.passage}`:'';$('passageBox').classList.toggle('hidden',!q.passage);$('answers').innerHTML='';q.o.forEach((opt,i)=>{const b=document.createElement('button');b.className='answer-option'+(selected[current]===i?' selected':'');b.innerHTML=`<span class="answer-letter">${'ABCD'[i]}</span><span>${opt}</span>`;b.onclick=()=>{selected[current]=i;renderQuestion()};$('answers').appendChild(b)});$('prevBtn').disabled=current===0;$('prevBtn').style.opacity=current===0?'.4':'1';$('nextBtn').classList.toggle('hidden',current===9);$('finishBtn').classList.toggle('hidden',current!==9);$('progress').style.width=((current+1)*10)+'%';$('questionDots').innerHTML='';questions.forEach((_,i)=>{const b=document.createElement('button');b.textContent=i+1;b.className=(i===current?'current ':'')+(selected[i]!==null?'answered':'');b.onclick=()=>{current=i;renderQuestion()};$('questionDots').appendChild(b)})}
+function moveQuestion(n){current=Math.max(0,Math.min(9,current+n));renderQuestion()}
+function confirmExit(){if(confirm('Тесттен шықсаң, берілген жауаптар сақталмайды. Шығасың ба?')){clearInterval(timerId);showPage('tests')}}
+function finishTest(){clearInterval(timerId);lastScore=questions.reduce((s,q,i)=>s+(selected[i]===q.a?1:0),0);const result={name:student.name,klass:student.klass,score:lastScore,total:10,date:new Date().toLocaleString('kk-KZ'),answers:[...selected]};const all=JSON.parse(localStorage.getItem('oylabResults')||'[]');all.push(result);localStorage.setItem('oylabResults',JSON.stringify(all));$('resultName').textContent=student.name.split(' ')[0]+'!';$('scoreValue').textContent=lastScore;$('scoreTitle').textContent=lastScore>=9?'Өте жақсы нәтиже!':lastScore>=7?'Жақсы нәтиже!':lastScore>=5?'Жақсы бастама!':'Тағы да жаттығайық!';$('scoreMessage').textContent=`10 сұрақтың ${lastScore}-іне дұрыс жауап бердің. Әр сынақ — тәжірибе!`;$('review').classList.add('hidden');showPage('result')}
+function showReview(){$('review').classList.toggle('hidden');$('review').innerHTML=questions.map((q,i)=>`<div class="review-item"><strong>${i+1}. ${q.q}</strong><p class="${selected[i]===q.a?'correct':'incorrect'}">${selected[i]===q.a?'✓ Дұрыс':'✕ Дұрыс жауап: '+ 'ABCD'[q.a]+'. '+q.o[q.a]}</p><p>${q.e}</p></div>`).join('')}
+function renderProfile(){const s=JSON.parse(localStorage.getItem('oylabStudent')||'null');if(s){student=s;$('profileName').textContent=s.name;$('profileGreeting').textContent='Оқу барысын осы жерден бақылай аласың.'}else{$('profileName').textContent='Қонақ'}const all=JSON.parse(localStorage.getItem('oylabResults')||'[]').filter(x=>!s||x.name===s.name);$('attemptCount').textContent=all.length;$('averageScore').textContent=all.length?(all.reduce((a,b)=>a+b.score,0)/all.length).toFixed(1)+'/10':'—';$('historyList').innerHTML=all.length?all.slice().reverse().map(x=>`<div class="history-row"><span>Оқу сауаттылығы · ${x.date}</span><strong>${x.score}/10</strong></div>`).join(''):'<p class="empty-state">Әзірге нәтиже жоқ. Алғашқы тестті тапсырып көр!</p>'}
+function teacherLogin(){const pass=prompt('Мұғалім кабинеті. Құпиясөзді енгізіңіз:');if(pass==='oylab2026'){showPage('teacher')}else if(pass!==null){alert('Құпиясөз дұрыс емес. Демонстрациялық нұсқада уақытша пароль: oylab2026')}}
+function renderTeacher(){const all=JSON.parse(localStorage.getItem('oylabResults')||'[]');$('teacherAttempts').textContent=all.length;$('teacherAverage').textContent=all.length?(all.reduce((a,b)=>a+b.score,0)/all.length).toFixed(1)+'/10':'—';$('teacherRows').innerHTML=all.length?'<div class="student-row head"><span>ОҚУШЫ</span><span>БАЛЛ</span><span>КҮНІ</span></div>'+all.slice().reverse().map(x=>`<div class="student-row"><span>${escapeHtml(x.name)}</span><strong>${x.score}/10</strong><span>${x.date.split(',')[0]}</span></div>`).join(''):'<p class="empty-state">Оқушылар тест тапсырғаннан кейін нәтижелері осында көрінеді.</p>'}
+function escapeHtml(s){return s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function exportResults(){const all=JSON.parse(localStorage.getItem('oylabResults')||'[]');if(!all.length){alert('Әзірге жүктейтін нәтиже жоқ.');return}const csv='Аты-жөні,Сыныбы,Балл,Күні\n'+all.map(x=>[x.name,x.klass,x.score,x.date].map(v=>'"'+String(v).replaceAll('"','""')+'"').join(',')).join('\n');const blob=new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='oylab-natizheler.csv';a.click();URL.revokeObjectURL(a.href)}
+try{student=JSON.parse(localStorage.getItem('oylabStudent')||'null')}catch(e){student=null}
