@@ -1,86 +1,102 @@
 <!DOCTYPE html>
 <html lang="kk">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#0b1730">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>OYLAB.kz — Ойлан. Оқы. Талда. Дәлелде.</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div class="app-shell">
-  <header class="topbar">
-    <a class="brand" href="#" aria-label="OYLAB басты бет" onclick="showPage('home');return false">
-      <span class="brand-mark">O</span><span>OYLAB<span class="gold">.kz</span><small>ОЙЛАН. ОҚЫ. ТАЛДА. ДӘЛЕЛДЕ.</small></span>
-    </a>
-    <nav><button class="nav-link active" onclick="showPage('home')">Басты бет</button><button class="nav-link" onclick="showPage('tests')">Тесттер</button><button class="nav-link" onclick="showPage('about')">Платформа</button></nav>
-    <button class="outline-btn" onclick="openLogin()">Кіру</button>
-  </header>
+<header class="top">
+  <a class="logo" href="#" data-page="home">OYLAB<span>.kz</span><small>Ойлан. Оқы. Талда. Дәлелде.</small></a>
+  <nav>
+    <button type="button" data-page="home">Басты бет</button>
+    <button type="button" data-page="course">Оқу курсы</button>
+    <button type="button" data-page="tests">Тесттер</button>
+  </nav>
+  <button type="button" class="teacher-btn" data-page="teacher-login">Мұғалімге кіру</button>
+</header>
+<main>
+<section id="home" class="page active">
+  <div class="hero"><div><p class="eyebrow">11-СЫНЫП · ҰБТ-ҒА ДАЙЫНДЫҚ</p>
+  <h1>Ойлан. Оқы.<br><em>Талда. Дәлелде.</em></h1>
+  <p>Оқу сауаттылығын түсініп үйрен. Алдымен сабақ оқы, содан кейін жаттық, соңында біліміңді тексер.</p>
+  <button class="gold-btn" type="button" data-page="student">Оқушы ретінде кіру →</button></div>
+  <div class="hero-art"><div class="book">ОҚУ<br>+<br>ОЙЛАУ</div></div></div>
+  <h2>Үйренудің үш қадамы</h2>
+  <div class="cards">
+    <article><b>01</b><h3>Түсіндірме сабақтар</h3><p>Теория, көрнекі мысалдар және пайдалы кеңестер.</p><button type="button" class="link-btn" data-page="course">Сабақтарды ашу →</button></article>
+    <article><b>02</b><h3>Практикалық тапсырмалар</h3><p>Әр тақырыптан кейін білімді бекіту.</p><button type="button" class="link-btn" data-page="practice">Жаттығу жасау →</button></article>
+    <article><b>03</b><h3>Тақырыптық тесттер</h3><p>Нәтижеңді көріп, қатеңді түсіндірмесімен талда.</p><button type="button" class="link-btn" data-page="tests">Тесттерге өту →</button></article>
+  </div>
+</section>
 
-  <main>
-    <section id="home" class="page active">
-      <div class="hero">
-        <div class="hero-copy">
-          <div class="eyebrow"><span></span> БІЛІМГЕ БАСТАР ЖОЛ</div>
-          <h1>Біліміңді шыңда.<br><em>Өз ойыңды дәлелде.</em></h1>
-          <p>ҰБТ оқу сауаттылығына дайындалуға арналған заманауи оқу кеңістігі. Оқы, түсін, талда және нәтижеге жет.</p>
-          <div class="hero-actions"><button class="primary-btn" onclick="openLogin()">Оқуды бастау <b>↗</b></button><button class="text-btn" onclick="showPage('tests')">Тесттерді көру <span>→</span></button></div>
-          <div class="hero-note"><span class="avatars">✦ ✧ ✦</span> Әр қадам — алға жылжу</div>
-        </div>
-        <div class="hero-art">
-          <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
-          <div class="book-card"><div class="book-top">OYLAB <span>№01</span></div><div class="book-line"></div><div class="book-title">ОҚУ<br>САУАТТЫЛЫҒЫ</div><div class="book-bottom">ТҮСІН · ТАЛДА · ДӘЛЕЛДЕ</div></div>
-          <div class="floating-tag tag-a">10 сұрақ <strong>01</strong></div><div class="floating-tag tag-b">Ойлау қабілеті <strong>↗</strong></div>
-          <div class="sparkle s1">✦</div><div class="sparkle s2">✧</div>
-        </div>
-      </div>
-      <div class="stats-row"><div><strong>10</strong><span>сұрақ / сынақ</span></div><div><strong>4</strong><span>жауап нұсқасы</span></div><div><strong>10 <i>балл</i></strong><span>ең жоғары нәтиже</span></div><div><strong>∞</strong><span>даму мүмкіндігі</span></div></div>
-      <section class="section-block"><div class="section-heading"><div><div class="eyebrow">БІЛІМ БАҒЫТТАРЫ</div><h2>Өзіңе қажетті бағытты таңда</h2></div><span class="section-index">01 / 03</span></div>
-        <div class="direction-grid">
-          <article class="direction-card featured"><div class="card-icon">▤</div><span class="card-kicker">НЕГІЗГІ БАҒЫТ</span><h3>ҰБТ оқу<br>сауаттылығы</h3><p>Мәтінді түсіну, ақпаратты талдау және дұрыс қорытынды жасау.</p><button onclick="showPage('tests')">Тестке өту <b>→</b></button><div class="card-watermark">01</div></article>
-          <article class="direction-card"><div class="card-icon">✎</div><span class="card-kicker">КЕЛЕСІ КЕЗЕҢ</span><h3>Қорытынды<br>аттестаттау</h3><p>Мектеп бағдарламасы бойынша білімді бекітуге арналған тапсырмалар.</p><span class="coming">Жақында</span><div class="card-watermark">02</div></article>
-          <article class="direction-card"><div class="card-icon">◈</div><span class="card-kicker">ЖЕКЕ ДАМУ</span><h3>Нәтиже және<br>жетістік</h3><p>Өз көрсеткішіңді бақылап, алға қойған мақсатыңа жақында.</p><button onclick="showPage('profile')">Кабинетке өту <b>→</b></button><div class="card-watermark">03</div></article>
-        </div>
-      </section>
-      <section class="quote-band"><span>“</span><p>Оқу — ақпарат жинау емес, оны түсініп, өмірде қолдана білу.</p><small>OYLAB.KZ ҰСТАНЫМЫ</small></section>
-    </section>
+<section id="student" class="page narrow">
+  <p class="eyebrow">ОҚУШЫ КАБИНЕТІ</p><h2>Қош келдің!</h2><p>Аты-жөніңді енгізіп, сыныбыңды таңда.</p>
+  <form id="student-form" class="panel">
+    <label>Аты-жөнің<input id="student-name" required placeholder="Мысалы: Айдана Нұрланқызы"></label>
+    <label>Сыныбы<select id="student-class"><option>11 «Ә»</option></select></label>
+    <button class="gold-btn" type="submit">Кабинетке кіру →</button>
+  </form>
+</section>
 
-    <section id="tests" class="page">
-      <div class="page-head"><div class="eyebrow">ДАЙЫНДЫҚ БӨЛІМІ</div><h1>Білімінді <em>сынап көр.</em></h1><p>Әр сынақта 10 сұрақ. Әр дұрыс жауапқа — 1 балл.</p></div>
-      <div class="test-launch"><div class="test-number">01</div><div class="test-info"><span class="card-kicker">ҰБТ · ОҚУ САУАТТЫЛЫҒЫ</span><h2>Мәтінді түсіну және талдау</h2><p>2 мәтін · 10 сұрақ · 15 минутқа ұсынылады</p><div class="chips"><span>10 сұрақ</span><span>10 балл</span><span>Бір дұрыс жауап</span></div></div><button class="primary-btn" onclick="startTest()">Бастау <b>↗</b></button></div>
-      <div class="notice"><span>✦</span><div><strong>Кеңес</strong><p>Алдымен мәтінді толық оқы. Сұрақтағы негізгі сөздерге назар аударып, жауапты мәтіндегі ақпаратпен салыстыр.</p></div></div>
-    </section>
+<section id="dashboard" class="page">
+  <div class="section-row"><div><p class="eyebrow">ОҚУШЫ КАБИНЕТІ</p><h2 id="welcome">Сәлем!</h2></div><button class="plain-btn" id="student-logout" type="button">Шығу</button></div>
+  <div class="cards">
+    <article><b>📘</b><h3>Толық оқу курсы</h3><p>10 модульден тұратын түсіндірме сабақтар.</p><button class="gold-btn" type="button" data-page="course">Курсты ашу</button></article>
+    <article><b>✍️</b><h3>Практика</h3><p>Үйренгеніңді тапсырмалармен бекіт.</p><button class="gold-btn" type="button" data-page="practice">Жаттығу</button></article>
+    <article><b>✓</b><h3>Тесттер</h3><p>Біліміңді тексеріп, қатеңді талда.</p><button class="gold-btn" type="button" data-page="tests">Тест таңдау</button></article>
+  </div>
+  <div class="panel"><h3>Менің соңғы нәтижелерім</h3><div id="my-results">Әзірге тест тапсырылмаған.</div></div>
+</section>
 
-    <section id="quiz" class="page">
-      <div class="quiz-top"><button class="back-btn" onclick="confirmExit()">← Тесттерге қайту</button><span class="quiz-label">OYLAB / СЫНАҚ №01</span><span id="timer" class="timer">15:00</span></div>
-      <div class="progress-track"><div id="progress" class="progress-fill"></div></div>
-      <div class="quiz-layout"><aside class="question-nav"><span class="muted-label">СҰРАҚТАР</span><div id="questionDots" class="question-dots"></div><div class="nav-legend"><span class="dot done"></span> Жауап берілді</div></aside>
-        <article class="question-panel"><div class="question-meta"><span id="qCounter">СҰРАҚ 01 / 10</span><span class="point-label">1 БАЛЛ</span></div><div id="passageBox" class="passage-box"></div><h2 id="questionText"></h2><div id="answers" class="answers"></div><div class="quiz-controls"><button id="prevBtn" class="outline-btn" onclick="moveQuestion(-1)">← Артқа</button><button id="nextBtn" class="primary-btn" onclick="moveQuestion(1)">Келесі сұрақ →</button><button id="finishBtn" class="primary-btn hidden" onclick="finishTest()">Тестті аяқтау ✓</button></div></article>
-      </div>
-    </section>
+<section id="course" class="page">
+  <p class="eyebrow">ТОЛЫҚ ОҚУ КУРСЫ</p><h2>Оқу сауаттылығы: 10 модуль</h2>
+  <p>Әр сабақта теория, мысал және есте сақтайтын кеңес бар.</p>
+  <div class="course-grid"><div id="module-list" class="modules"></div><article id="lesson" class="panel"><h3>Сабақты таңдаңыз</h3><p>Сол жақтағы модульді басыңыз.</p></article></div>
+</section>
 
-    <section id="result" class="page">
-      <div class="result-wrap"><div class="eyebrow">СЫНАҚ АЯҚТАЛДЫ</div><h1>Жарайсың, <em id="resultName">оқушы!</em></h1><div class="score-ring"><div><strong id="scoreValue">0</strong><span>/ 10 балл</span></div></div><h2 id="scoreTitle">Нәтижең</h2><p id="scoreMessage"></p><div class="result-actions"><button class="primary-btn" onclick="showReview()">Қателерді талдау</button><button class="outline-btn" onclick="showPage('tests')">Қайта тапсыру</button></div><div id="review" class="review-list hidden"></div></div>
-    </section>
+<section id="practice" class="page narrow">
+  <p class="eyebrow">БІЛІМДІ БЕКІТУ</p><h2>Практикалық тапсырма</h2>
+  <article class="panel"><p class="reading">Кітап оқу адамның дүниетанымын кеңейтеді. Оқырман жаңа ақпарат алып қана қоймай, өз ойын жүйелі жеткізуге, салыстыруға және қорытынды жасауға дағдыланады.</p>
+  <h3>Мәтіндегі негізгі ойды таңда:</h3>
+  <div id="practice-options"></div><button type="button" class="gold-btn" id="practice-check">Жауапты тексеру</button><p id="practice-feedback"></p></article>
+</section>
 
-    <section id="profile" class="page">
-      <div class="page-head"><div class="eyebrow">ЖЕКЕ КАБИНЕТ</div><h1>Сенің <em>нәтижелерің.</em></h1><p id="profileGreeting">Оқу барысын осы жерден бақылай аласың.</p></div>
-      <div class="profile-summary"><div><span class="muted-label">ОҚУШЫ</span><h2 id="profileName">Қонақ</h2><p>11 «Ә» сыныбы</p></div><div><span class="muted-label">ТАПСЫРҒАН ТЕСТ</span><strong id="attemptCount">0</strong></div><div><span class="muted-label">ОРТАША БАЛЛ</span><strong id="averageScore">—</strong></div></div>
-      <h2 class="subheading">Тест тарихы</h2><div id="historyList" class="history-list"><p class="empty-state">Әзірге нәтиже жоқ. Алғашқы тестті тапсырып көр!</p></div>
-    </section>
+<section id="tests" class="page">
+  <p class="eyebrow">БІЛІМІҢДІ ТЕКСЕР</p><h2>Тесттер жинағы</h2><p>Әр тестте 10 сұрақ, 4 жауап нұсқасы. Әр дұрыс жауап — 1 балл.</p>
+  <div id="test-list" class="cards"></div>
+</section>
 
-    <section id="teacher" class="page">
-      <div class="page-head"><div class="eyebrow">МҰҒАЛІМ КАБИНЕТІ</div><h1>Сынып <em>көрсеткіші.</em></h1><p>11 «Ә» сыныбы · 28 оқушы</p></div>
-      <div class="teacher-stats"><div><span>Оқушы саны</span><strong>28</strong></div><div><span>Тест тапсырғандар</span><strong id="teacherAttempts">0</strong></div><div><span>Орташа нәтиже</span><strong id="teacherAverage">—</strong></div></div>
-      <div class="teacher-table"><div class="table-head"><h2>Оқушылар нәтижесі</h2><button class="outline-btn" onclick="exportResults()">CSV жүктеу ↓</button></div><div id="teacherRows"><p class="empty-state">Оқушылар тест тапсырғаннан кейін нәтижелері осында көрінеді.</p></div></div>
-      <p class="small-note">Ескерту: бұл нұсқада нәтижелер осы браузердің жадында ғана сақталады. Нақты мұғалім кабинеті үшін қорғалған дерекқор қосу қажет.</p>
-    </section>
+<section id="quiz" class="page narrow">
+  <div class="section-row"><div><p class="eyebrow">ТЕСТ ТАПСЫРУ</p><h2 id="quiz-title"></h2></div><b id="quiz-count">1/10</b></div>
+  <div class="progress"><span id="progress-bar"></span></div>
+  <article class="panel"><h3 id="question"></h3><div id="options"></div><div class="section-row"><button type="button" class="plain-btn" id="prev">← Артқа</button><button type="button" class="gold-btn" id="next">Келесі →</button></div></article>
+</section>
 
-    <section id="about" class="page"><div class="page-head"><div class="eyebrow">OYLAB ТУРАЛЫ</div><h1>Ойлан. Оқы. <em>Талда. Дәлелде.</em></h1><p>OYLAB — оқушының оқу сауаттылығын және мәтінмен жұмыс істеу дағдысын дамытуға арналған білім беру кеңістігі.</p></div><div class="about-grid"><div><span class="card-icon">◎</span><h2>Мақсат</h2><p>Мәтінді түсіну, негізгі ойды анықтау, ақпаратты салыстыру және дәлелді қорытынды жасау дағдыларын дамыту.</p></div><div><span class="card-icon">✦</span><h2>Тәсіл</h2><p>Қысқа мәтіндер, нақты сұрақтар және әр жауаптан кейінгі түсіндірме арқылы жүйелі дайындық.</p></div></div></section>
-  </main>
-  <footer><div class="brand footer-brand"><span class="brand-mark">O</span><span>OYLAB<span class="gold">.kz</span><small>ОЙЛАН. ОҚЫ. ТАЛДА. ДӘЛЕЛДЕ.</small></span></div><span>© 2026 OYLAB.kz · Білімге бастар жол</span><button class="teacher-link" onclick="teacherLogin()">Мұғалімге кіру</button></footer>
-</div>
+<section id="result" class="page narrow">
+  <p class="eyebrow">ТЕСТ АЯҚТАЛДЫ</p><h2>Нәтижең</h2><div class="score" id="score"></div><p id="score-message"></p>
+  <article class="panel"><h3>Жауаптарды талдау</h3><div id="review"></div><button type="button" class="gold-btn" data-page="tests">Басқа тест таңдау</button></article>
+</section>
 
-<div id="loginModal" class="modal hidden"><div class="modal-card"><button class="modal-close" onclick="closeLogin()">×</button><div class="eyebrow">OYLAB ЖҮЙЕСІНЕ ҚОШ КЕЛДІҢ</div><h2>Оқуды <em>бастайық.</em></h2><label for="studentName">Аты-жөнің</label><input id="studentName" type="text" placeholder="Мысалы: Айдана Нұрланқызы" maxlength="70"><label for="studentClass">Сыныбы</label><select id="studentClass"><option>11 «Ә»</option></select><p class="form-hint">Тіркелу қажет емес. Аты-жөніңді енгізіп жалғастыр.</p><button class="primary-btn full" onclick="enterStudent()">Жалғастыру →</button><p id="loginError" class="error"></p></div></div>
+<section id="teacher-login" class="page narrow">
+  <p class="eyebrow">МҰҒАЛІМ КАБИНЕТІ</p><h2>Мұғалім ретінде кіру</h2>
+  <p>Демонстрациялық нұсқаның құпиясөзін енгізіңіз.</p>
+  <form id="teacher-form" class="panel">
+    <label>Құпиясөз<input id="teacher-password" type="password" required placeholder="Құпиясөз"></label>
+    <button class="gold-btn" type="submit">Кіру →</button>
+    <small>Демо құпиясөзі: <b>oylab2026</b></small>
+    <p id="login-error" class="error" aria-live="polite"></p>
+  </form>
+</section>
+
+<section id="teacher" class="page">
+  <div class="section-row"><div><p class="eyebrow">МҰҒАЛІМ КАБИНЕТІ · 11 «Ә»</p><h2>Оқушылар нәтижесі</h2></div><button type="button" class="plain-btn" data-page="home">Шығу</button></div>
+  <div class="cards stats"><article><small>Тест тапсырылымы</small><h2 id="total-results">0</h2></article><article><small>Орташа балл</small><h2 id="average-score">—</h2></article><article><small>Оқушы саны</small><h2 id="total-students">0</h2></article></div>
+  <article class="panel"><div class="section-row"><h3>Нәтижелер кестесі</h3><button type="button" class="plain-btn" id="export">CSV жүктеу ↓</button></div>
+  <div class="table-wrap"><table><thead><tr><th>Оқушы</th><th>Сынып</th><th>Тест</th><th>Ұпай</th><th>Күні</th></tr></thead><tbody id="teacher-rows"><tr><td colspan="5">Әзірге нәтиже жоқ.</td></tr></tbody></table></div></article>
+  <p class="warning">Маңызды: бұл демо-нұсқада нәтижелер тек тест тапсырылған осы құрылғының браузерінде сақталады. Әртүрлі телефондардан ортақ көру үшін Supabase сияқты ортақ дерекқорды қосу қажет. Қазіргі мұғалім құпиясөзі өндірістік қауіпсіздікке арналмаған.</p>
+</section>
+</main>
+<footer><b>OYLAB<span>.kz</span></b><small>Ойлан. Оқы. Талда. Дәлелде.</small></footer>
 <script src="script.js"></script>
 </body></html>
